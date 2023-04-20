@@ -1,0 +1,25 @@
+plugins {
+    id 'application'
+    id 'war'
+}
+
+archivesBaseName = 'biblio-manager'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+}
+
+application {
+    mainClass = 'org.mql.biblio.App'
+}
+
+task localDeploy(type: Copy) {
+    dependsOn clean, war
+    from 'build/libs/biblio-manager.war'
+    into '/Users/elmehdichenfourmac/Workspace/Amine/S2/Tools/apache-tomcat-10.0.5/webapps'
+}
